@@ -15,8 +15,7 @@
                         </group>
                     </sheet>
                     <footer>
-                        <button name="Calc_data" string="Calculate" type="object" class="btn-primary"
-                                />
+                        <button name="Calc_data" string="Calculate" type="object" class="btn-primary"/>
                         <button string="Cancel" class="btn-default" special="cancel"/>
                     </footer>
                 </form>
