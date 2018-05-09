@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+
+        <!--room type views     -->
+        <record id="type_form" model="ir.ui.view">
+            <field name="name">type.form</field>
+            <field name="model">room.type</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="subtype"/>
+                        </group>
+                        <field name="facility_ids"/>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="room_type_tree" model="ir.ui.view">
+            <field name="name">room.type.tree</field>
+            <field name="model">room.type</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="subtype"/>
+                </tree>
+            </field>
+        </record>
+
+        <!--room type Action     -->
+
+        <record id="room_type_action" model="ir.actions.act_window">
+            <field name="name">Room Type</field>
+            <field name="res_model">room.type</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!--Main Menu-->
+        <menuitem id="main" name="Hotel Management" sequence="10"/>
+        <menuitem id="config" name="Configuration" parent="main"/>
+
+        <!--room type menu     -->
+        <menuitem id="room_type_menu" name="Room type" parent="config"
+                  action="room_type_action"/>
+
+
+        <!--room details views-->
+        <record id="room_details_form" model="ir.ui.view">
+            <field name="name">Room Details</field>
+            <field name="model">room.details</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group col="4">
+                            <field name="name"/>
+                            <field name="type_id" required="1"/>
+                            <field name="occupancy"/>
+                            <field name="terrif" required="1"/>
+                            <field name="status"/>
+                        </group>
+                        <separator string="Specification"/>
+                        <field name="specification" placeholder="Specification or Notes are write here."/>
+                        <notebook>
+                            <page string="Facility">
+                                <field name="facility_ids"/>
+                                <field name="product_id" invisible="1"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <record id="room_details_tree" model="ir.ui.view">
+            <field name="name">Room Details</field>
+            <field name="model">room.details</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="type_id"/>
+                    <field name="occupancy"/>
+                    <field name="terrif"/>
+                    <field name="status"/>
+                </tree>
+            </field>
+        </record>
+
+        <!--room.details Action-->
+
+        <record id="room_details_action" model="ir.actions.act_window">
+            <field name="name">Room Details</field>
+            <field name="res_model">room.details</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!--room details menuitem-->
+
+        <menuitem id="room_details_menu" parent="config" sequence="10"
+                  action="room_details_action"/>
+
+
+        <!--room facility views-->
+
+        <record id="room_facility_form" model="ir.ui.view">
+            <field name="name">room.facility.form</field>
+            <field name="model">room.facility</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group col="4">
+                            <field name="name"/>
+                            <field name="type_id"/>
+                            <field name="mode"/>
+                            <field name="charge" attrs="{'invisible':[('mode','!=','charge')]}"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="room_facility_tree" model="ir.ui.view">
+            <field name="name">room.facility.tree</field>
+            <field name="model">room.facility</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="type_id"/>
+                    <field name="mode"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <!--room facility Actions-->
+
+        <record id="room_facility_action" model="ir.actions.act_window">
+            <field name="name">Room facility</field>
+            <field name="res_model">room.facility</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!--room facility menu-->
+        <menuitem id="room_facility_menu" parent="config" sequence="10"
+                  action="room_facility_action"/>
+
+
+        <!--hotel.folio views-->
+        <record id="hotel_folio_form_view" model="ir.ui.view">
+            <field name="name">hotel.folio.form.view</field>
+            <field name="model">hotel.folio</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group col="4">
+                            <field name="name"/>
+                            <field name="date"/>
+                            <field name="folio_bool"/>
+                            <field name="member_bool"/>
+                        </group>
+                        <separator string="Hotel Folio Lines"/>
+                        <field name="room_details_ids"/>
+
+                        <notebook>
+                            <page string="Folio">
+                                <group col="4">
+                                    <field name="guest_id" attrs="{'required':[('folio_bool','=',True)]}"/>
+                                    <field name="duration"/>
+                                    <field name="email"/>
+                                    <field name="check_in"/>
+                                    <field name="mobile"/>
+                                    <field name="check_out"/>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="hotel_folio_tree_view" model="ir.ui.view">
+            <field name="name">hotel.folio.tree.view</field>
+            <field name="model">hotel.folio</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="date"/>
+                    <field name="folio_bool"/>
+                    <field name="member_bool"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="search_hotel_folio" model="ir.ui.view">
+            <field name="name">search.hotel.folio</field>
+            <field name="model">hotel.folio</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name"/>
+                    <group expand="0" string="Group By">
+                        <filter string="name" domain="[]" context="{'group_by':'name'}"/>
+                        <filter string="date" domain="[]" context="{'group_by':'check_in'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!--hotel.folio.action-->
+
+        <record id="hotel_folio_action" model="ir.actions.act_window">
+            <field name="name">Hotel Folio</field>
+            <field name="res_model">hotel.folio</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="search_hotel_folio"/>
+
+        </record>
+
+        <!--hotel folio menu-->
+
+        <menuitem id="hotel_folio_menu" sequence="1" parent="main"
+                  action="hotel_folio_action"/>
+        <!--inherit product.template-->
+
+        <!-- Inherit Form View to Modify it -->
+        <record id="inherit_product" model="ir.ui.view">
+            <field name="name">inherit.product</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_form_view"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='list_price']" position="after">
+                    <!-- Add your fields or attributes here -->
+                    <field name="room_details_id"/>
+                </xpath>
+
+            </field>
+        </record>
+    </data>
+</odoo>

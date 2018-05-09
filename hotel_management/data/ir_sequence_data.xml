@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<odoo>
+    <data>
+
+         <record id="sequence_room_details" model="ir.sequence">
+            <field name="name">Room Name</field>
+            <field name="code">room.details.seq</field>
+            <field name="prefix">Rm/</field>
+            <field name="padding">3</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+        </record>
+
+         <record id="sequence_hotel_folio" model="ir.sequence">
+            <field name="name">Hotel folio /name</field>
+            <field name="code">hotel.folio.seq</field>
+            <field name="prefix">HT</field>
+            <field name="padding">3</field>
+        </record>
+    </data>
+</odoo>

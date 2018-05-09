@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="sample_form_view">
+            <field name="name">sample.form</field>
+            <field name="model">sample.sample</field>
+            <field name="arch" type="xml">
+                <form string="sample">
+                    <sheet>
+                        <group>
+                            <field name="a"/>
+                            <field name="b"/>
+                            <field name="select"/>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button name="Calc_data" string="Calculate" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-default" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <!--Action of wizard-->
+
+        <record id="action_sample" model="ir.actions.act_window">
+            <field name="name">Sample</field>
+            <field name="res_model">sample.sample</field>
+            <field name="view_mode">form</field>
+            <field name="view_type">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <!--Menu of wizard-->
+        <menuitem id="sample_menu" name="wizard" action="action_sample" parent="main"/>
+    </data>
+</odoo>
