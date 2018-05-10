@@ -92,10 +92,30 @@ class room_details(models.Model):
         #     self.facility_ids=list1
         #     print ('\n\n\n\n========ids',self.facility_ids)
 
+    @api.multi
+    def action_clean(self):
+        self.state='clean'
+
+    @api.multi
+    def action_cancel(self):
+        self.state='cancel'
+
+    @api.multi
+    def action_inspect(self):
+        self.state = 'inspect'
+
+    @api.multi
+    def action_done(self):
+        self.state = 'done'
+
+    @api.multi
+    def action_dirty(self):
+        self.state = 'dirty'
 
     name=fields.Char('Room_name/No.',required=True)
     type_id=fields.Many2one('room.type','Room Type')
-    status=fields.Selection([('dirty','Dirty'),('clean','Clean'),('inspect','Inspect'),('done','Done'),('cancel','Cancelled')])
+    state=fields.Selection([('dirty','Dirty'),('clean','Clean'),('inspect','Inspect'),('done','Done'),
+                            ('cancel','Cancelled')],default='dirty')
     specification=fields.Text('Specification')
     occupancy=fields.Integer('Occupancy')
     terrif=fields.Float('Terrif')

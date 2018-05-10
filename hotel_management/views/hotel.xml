@@ -53,14 +53,26 @@
             <field name="name">Room Details</field>
             <field name="model">room.details</field>
             <field name="arch" type="xml">
-                <form>
+                <form string="room form">
+                    <header>
+                        <button name="action_clean" string="Clean" type="object"
+                                attrs="{'invisible':[('state','in',('clean','inspect','done','cancel'))]}" class="btn-primary"/>
+                        <button name="action_inspect" string="Inspect" type="object"
+                                attrs="{'invisible':[('state','in',('inspect','dirty','done','cancel'))]}" class="btn-primary"/>
+                        <button name="action_done" string="Done" type="object"
+                                attrs="{'invisible':[('state','in',('clean','dirty','done','cancel'))]}" class="btn-primary"/>
+                        <button name="action_dirty" string="Dirty" type="object"
+                                attrs="{'invisible':[('state','in',('clean','inspect','dirty'))]}" class="btn-primary"/>
+                        <button name="action_cancel" string="Cancel" type="object"
+                                attrs="{'invisible':[('state','in',('cancel'))]}"/>
+                        <field name="state" widget="statusbar"/>
+                    </header>
                     <sheet>
                         <group col="4">
                             <field name="name"/>
                             <field name="type_id" required="1"/>
                             <field name="occupancy"/>
                             <field name="terrif" required="1"/>
-                            <field name="status"/>
                         </group>
                         <separator string="Specification"/>
                         <field name="specification" placeholder="Specification or Notes are write here."/>
@@ -85,7 +97,6 @@
                     <field name="type_id"/>
                     <field name="occupancy"/>
                     <field name="terrif"/>
-                    <field name="status"/>
                 </tree>
             </field>
         </record>
